@@ -7,46 +7,43 @@ class linkedList(node):
     def __init__(self, head=None):
 	    self.head=head
 	    
-    def tail(self, head):
-	    self.cur = head
-	    while True:
-        	print (self.cur.value, " -> ", end=""),
-        	if(self.cur.nextNode == None):
-        	    return cur
-        	    break
-        	self.cur = self.cur.nextNode
-    def traverse(self):
-        self.cur = self.head
+    def get_tail(self):
+        if self.head is None:
+            return None
+        itr = self.head
         while True:
-        	print (self.cur.value, " -> ", end=""),
-        	if(self.cur.nextNode == None):
-        	    break
-        	self.cur = self.cur.nextNode
-    def incert(self, value=None):
-        self.newnode = node(value)
-        self.tail = self.tail(self.head)
-        print(self.tail.value)
-        self.tail.nextNode = self.newnode
-        self.traverse()
-        return
-        
+            if itr.nextNode is None:
+                return itr
+            itr = itr.nextNode
+
+    def incert_at_end(self, value):
+        tail = self.get_tail()
+        newNode = node(value)
+        tail.nextNode = newNode
+    
+    def incert_at_start(self, value):
+        newNode = node(value)
+        newNode.nextNode = self.head
+        self.head = newNode
+
+    def Print(self):
+        itr = self.head
+        while True:
+            print(itr.value," -> ", end="")
+            if itr.nextNode is None:
+                return
+            itr = itr.nextNode
     
     
 ll = linkedList()
 
 node1 = node(3)
 ll.head = node1
+ll.incert_at_end(5)
 
-
-
-cur = ll.head
 while True:
-	print (cur.value, " -> ", end=""),
-	if(cur.nextNode == None):
-	    break
-	cur = cur.nextNode
+    inp = input('Enter node value')
+    ll.incert_at_start(inp)
+    ll.Print()
+
 	
-while True:
-    print(ll.head)
-    inp = input("Enter node value: ")
-    ll.incert(inp)
