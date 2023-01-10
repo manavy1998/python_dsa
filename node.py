@@ -16,6 +16,21 @@ class linkedList(node):
                 return itr
             itr = itr.nextNode
 
+    def iterate(self, position):
+        itr = self.head
+        for i in range(position):
+            if itr.nextNode is None:
+                print('Linked list over, position too large.')
+                return
+            itr = itr.nextNode
+        return itr
+
+    def incert(self, value, position):
+        oldNode = self.iterate(position-1)
+        newNode = node(value)
+        newNode.nextNode = oldNode.nextNode
+        oldNode.nextNode = newNode
+
     def incert_at_end(self, value):
         tail = self.get_tail()
         newNode = node(value)
@@ -33,7 +48,16 @@ class linkedList(node):
             if itr.nextNode is None:
                 return
             itr = itr.nextNode
-    
+    def rev_rec(self, node):
+        if node.nextNode is None:
+            print(node.value, end=" ")
+            return
+        self.rev_rec(node.nextNode)
+        print(node.value, end=" ")
+        return
+
+    def Print_rev(self):
+        self.rev_rec(self.head)
     
 ll = linkedList()
 
@@ -41,9 +65,9 @@ node1 = node(3)
 ll.head = node1
 ll.incert_at_end(5)
 
-while True:
-    inp = input('Enter node value')
-    ll.incert_at_start(inp)
+for i in range(4):
+    val= input('Enter node value : ')
+    ll.incert_at_end(int(val))
     ll.Print()
 
-	
+ll.Print_rev()
